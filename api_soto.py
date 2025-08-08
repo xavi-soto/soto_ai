@@ -43,6 +43,10 @@ query_engine = index.as_chat_engine(
 
 class Message(BaseModel):
     text: str
+    
+@app.get("/")
+async def root():
+    return {"status": "SOTO API funcionando"}
 
 @app.post("/chat/")
 async def chat(message: Message):
