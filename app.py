@@ -34,11 +34,7 @@ app = FastAPI(
 )
 
 # --- Configuración de CORS ---
-origins = [
-    "https://xavi-soto.github.io", # Reemplaza "tucuenta" con tu nombre de usuario de GitHub
-    "https://sotosotosoto.com", 
-    "http://127.0.0.1:5500"       # Si usas Live Server para probar
-]
+origins = ["*"]
 
 app.add_middleware(
     CORSMiddleware,
