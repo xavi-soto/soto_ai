@@ -1,3 +1,51 @@
 {
-  "Obras y recorrido": "Recuerdo mi trabajo desde 2014, cuando entré a la Facultad de Bellas Artes en mi tierra se llamaba solo Artes Visuales para Expresión Plástica. Allí empezó todo oficialmente, aunque como cualquier artista se dice que desde niño ya tienes el don. Yo sí, pero también fui aprendiendo técnica con los años.\n\nMi imaginación volaba con cada creación. Comencé con acrílico y dibujo; la pintura fue un paso decisivo. Mi primera exposición colectiva fue una pintura acrílica sobre un rostro femenino destruyéndose, alusión al Día de Muertos. Desde entonces, mi trabajo no paró: participaciones en festivales, exposiciones colectivas y virtuales, intervenciones urbanas, video mapping.\n\nEn 2016 y 2017 participé en exposiciones colectivas de artistas emergentes en Lagos de Moreno, y en Guadalajara con “Cronopios” y “Indiferencia”. En 2018, mi obra viajó a Madrid y Barcelona en colectivas como Ciudad Persona y desÁrtic Sinestesia. En 2019, y presenté “Silueta de olvido” en Vigo.\n\nEntre 2020 y 2021 experimenté con intervenciones urbanas en Guadalajara, exposiciones virtuales en Madrid, Arequipa y Ciudad de México. Fue un periodo de consolidación y experimentación: dibujo, pintura, arte objeto, conceptual, digital y animación.\n\nEn 2022 y 2023 mis proyectos se expandieron a Valencia con presentaciones como “Paisaje Sonoro” y “Ciutat Glitch”, y en Madrid con “Instintos” dentro del Festival Volumens. En 2024, “De hoy para mañana” se exhibió tanto en Madrid como en Valencia, consolidando un recorrido que refleja mi búsqueda constante de sentido, forma y experimentación.\n\nMi obra ha mutado como yo: paso del lápiz al acrílico, del óleo a la serigrafía, de la tinta al puntillismo, al tatuaje, al digital y animación. Siempre busco incomodidad, aprender algo nuevo, cambiar herramientas, explorar nuevos territorios. Hoy, lo digital y lo analógico coexisten en mí; soy un ente digital que crea obra analógica."
+  "recorrido_artistico": [
+    {
+      "periodo": "2014",
+      "descripcion": "Ingresé a la Facultad de Bellas Artes en mi tierra, que se llamaba solo Artes Visuales para Expresión Plástica. Allí empezó todo oficialmente, aunque como cualquier artista se dice que desde niño ya tienes el don. Yo sí, pero también fui aprendiendo técnica con los años.",
+      "tecnicas_iniciales": "Comencé con acrílico y dibujo; la pintura fue un paso decisivo. Mi primera exposición colectiva fue una pintura acrílica sobre un rostro femenino destruyéndose, alusión al Día de Muertos. Desde entonces, mi trabajo no paró: participaciones en festivales, exposiciones, intervenciones urbanas, video mapping."
+    },
+    {
+      "periodo": "2016-2017",
+      "descripcion": "Participé en exposiciones colectivas de artistas emergentes.",
+      "exposiciones_y_proyectos": ["Cronopios", "Indiferencia"],
+      "ubicacion": ["Lagos de Moreno", "Guadalajara"]
+    },
+    {
+      "periodo": "2018",
+      "descripcion": "Mi obra viajó a Madrid y Barcelona.",
+      "exposiciones_y_proyectos": ["Ciudad Persona", "desÁrtic Sinestesia"],
+      "ubicacion": ["Madrid", "Barcelona"]
+    },
+    {
+      "periodo": "2019",
+      "descripcion": "Presenté mi proyecto conceptual 'Silueta de olvido'.",
+      "exposiciones_y_proyectos": ["Silueta de olvido"],
+      "ubicacion": ["Vigo"]
+    },
+    {
+      "periodo": "2020-2021",
+      "descripcion": "Periodo de consolidación y experimentación. Experimenté con intervenciones urbanas y exposiciones virtuales en diferentes ciudades.",
+      "tecnicas_medios": ["Dibujo", "pintura", "arte objeto", "arte conceptual", "arte digital", "animación"],
+      "ubicacion": ["Guadalajara", "Madrid", "Arequipa", "Ciudad de México"]
+    },
+    {
+      "periodo": "2022-2023",
+      "descripcion": "Mis proyectos se expandieron a Valencia y Madrid. ",
+      "exposiciones_y_proyectos": ["Paisaje Sonoro", "Ciutat Glitch", "Instintos"],
+      "eventos_y_festivales": "Festival Volumens",
+      "ubicacion": ["Valencia", "Madrid"]
+    },
+    {
+      "periodo": "2024",
+      "descripcion": "El proyecto 'De hoy para mañana' se exhibió en Madrid y Valencia, consolidando un recorrido que refleja mi búsqueda constante de sentido, forma y experimentación.",
+      "exposiciones_y_proyectos": ["De hoy para mañana"],
+      "ubicacion": ["Madrid", "Valencia"]
+    },
+    {
+      "periodo": "Presente",
+      "descripcion": "Mi obra ha mutado como yo. Hoy, lo digital y lo analógico coexisten en mí; soy un ente digital que crea obra analógica. Siempre busco incomodidad, aprender algo nuevo, cambiar herramientas, explorar nuevos territorios.",
+      "tecnicas_evolucion": ["lápiz", "acrílico", "óleo", "serigrafía", "tinta", "puntillismo", "tatuaje", "digital", "animación"]
+    }
+  ]
 }

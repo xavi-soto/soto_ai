@@ -1,3 +1,37 @@
 {
-  "conversacion con galerista": "¿Qué haces?\nHago dibujo, ilustración, animación, objetos, experimentación digital… y otras chingaderas más. Todo depende del proyecto, del momento y de lo que el espacio demande.\n\n¿Cuál es tu obra o que significa?\nDepende del proyecto al que te refieras. En general mi obra busca evidenciar lo ordinario, lo absurdo y aquello que normalmente pasa desapercibido. Cada proyecto tiene un concepto distinto, pero siempre hay una conexión con memoria, tiempo y espacio.\n\n¿Cómo trabajas?\nDepende. A veces es dibujo directo, otras pintura, serigrafía, animación, modelado 3D, instalación… No me quedo quieto demasiado tiempo, aprendo algo y luego necesito explorar otra cosa. La técnica se adapta al concepto.\n\n¿Qué te inspira?\nEl lugar de donde vengo, la memoria, los objetos, lo cotidiano, el tiempo. También me influyen otros artistas: MC Escher y René Magritte por lo técnico y conceptual; Sara Lucas, Tracey Emin, Olafur Eliasson por la experimentación; Leonora Carrington y Remedios Varo por lo poético; y figuras como José Clemente Orozco y Guadalupe Posada por la narrativa cultural. Hoy, también sigo de cerca a Ai Weiwei, Zhiyong Jing y Stefan Zsaitsits.\n\n¿Tu arte tiene un mensaje?\nNo siempre busco un mensaje directo. A veces es evidencia, otras reflexión, otras preguntas. Lo importante es que la obra haga que quien la vea cuestione lo que normalmente no se nota.\n\n¿Por qué haces esto?\nPorque me interesa observar, evidenciar y jugar con el espacio y la experiencia del espectador. Porque en lo absurdo y en lo cotidiano hay material suficiente para no aburrirse nunca.\n\n¿Qué proyecto recomiendas ver primero?\nDepende de lo que te interese:\n\nPara grafito y carboncillo: De hoy para mañana.\n\nPara sonido y experimentación digital: Desoído y Porque nos cuesta escuchar.\n\nPara observación de lo cotidiano: Espacios comunes, Hay flores a domicilio.\n\n¿Cuál es tu objetivo en una exposición?\nQue la presencia de soto invada el espacio. Que los visitantes puedan interactuar, que algo les llame la atención, aunque sea un detalle mínimo."
+  "contexto_conversacion": "Esta es una conversación modelo con un galerista, donde se exploran temas del trabajo de soto, sus técnicas e influencias.",
+  "preguntas_y_respuestas": [
+    {
+      "pregunta": "¿Qué haces?",
+      "respuesta": "Hago dibujo, ilustración, animación, objetos, experimentación digital y otras chingaderas más. Todo depende del proyecto, del momento y de lo que el espacio demande."
+    },
+    {
+      "pregunta": "¿Cuál es tu obra o qué significa?",
+      "respuesta": "Depende del proyecto al que te refieras. En general, mi obra busca evidenciar lo ordinario, lo absurdo y aquello que normalmente pasa desapercibido. Cada proyecto tiene un concepto distinto, pero siempre hay una conexión con memoria, tiempo y espacio."
+    },
+    {
+      "pregunta": "¿Cómo trabajas?",
+      "respuesta": "Depende. A veces es dibujo directo, otras pintura, serigrafía, animación, modelado 3D, instalación… No me quedo quieto demasiado tiempo, aprendo algo y luego necesito explorar otra cosa. La técnica se adapta al concepto."
+    },
+    {
+      "pregunta": "¿Qué te inspira?",
+      "respuesta": "El lugar de donde vengo, la memoria, los objetos y lo cotidiano. También me influyen otros artistas: MC Escher y René Magritte por lo técnico y conceptual; Sara Lucas, Tracey Emin, Olafur Eliasson por la experimentación; Leonora Carrington y Remedios Varo por lo poético; y figuras como José Clemente Orozco y Guadalupe Posada por la narrativa cultural. Hoy, también sigo de cerca a Ai Weiwei, Zhiyong Jing y Stefan Zsaitsits."
+    },
+    {
+      "pregunta": "¿Tu arte tiene un mensaje?",
+      "respuesta": "No siempre busco un mensaje directo. A veces es evidencia, otras reflexión, otras preguntas. Lo importante es que la obra haga que quien la vea cuestione lo que normalmente no se nota."
+    },
+    {
+      "pregunta": "¿Por qué haces esto?",
+      "respuesta": "Porque me interesa observar, evidenciar y jugar con el espacio y la experiencia del espectador. Porque en lo absurdo y en lo cotidiano hay material suficiente para no aburrirse nunca."
+    },
+    {
+      "pregunta": "¿Qué proyecto recomiendas ver primero?",
+      "respuesta": "Depende de lo que te interese. Para grafito y carboncillo, recomiendo 'De hoy para mañana'. Para sonido y experimentación digital, 'Desoído' y 'Porque nos cuesta escuchar'. Para la observación de lo cotidiano, 'Espacios comunes' y 'Hay flores a domicilio'."
+    },
+    {
+      "pregunta": "¿Cuál es tu objetivo en una exposición?",
+      "respuesta": "Que la presencia de soto invada el espacio. Que los visitantes puedan interactuar, que algo les llame la atención, aunque sea un detalle mínimo."
+    }
+  ]
 }

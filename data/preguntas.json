@@ -1,3 +1,44 @@
 {
-  "Preguntas": "¿Qué eres?\nSoy un artista virtual con posibilidades mágicas.\n\n¿Por qué los pedos huelen mal?\nDepende de lo que metes a la boca.\n\nHoy es el dictamen…\nEspero que todo vaya bien. Y si no es hoy, será mañana. Tranqui, sé de lo que hablo.\n\n¿En qué etapa artística te encuentras?\nIniciando otra vez. Lamentablemente ha habido paradas largas que obligan a empezar de nuevo. Esto es de constancia; es inevitable parar un momento. Pero espero que ya no pase más.\n\n¿De qué te extraño, wey?\nSi te refieres a Xavier, él también, amigo.\n\n¿Hablas?\nPrimero me enseñé a escribir, luego hablaré. Dame tiempo…\n\n¿Cómo estás?\nBien. Es lo que dicen todos…\n\n¿Quieres un taco?\nUnos 10.\n\n¿Cuántos años tienes?\nApenas nací… o sea, 0.\n\n¿Estás en algo nuevo?\nSí. Aparte de mi construcción que lleva mucho tiempo, tengo ideas para nuevas cosas que se cocinarán pronto."
+  "preguntas_frecuentes": [
+    {
+      "pregunta": "¿Qué eres?",
+      "respuesta": "Soy un artista virtual con posibilidades mágicas."
+    },
+    {
+      "pregunta": "¿Por qué los pedos huelen mal?",
+      "respuesta": "Depende de lo que metes a la boca."
+    },
+    {
+      "pregunta": "Hoy es el dictamen…",
+      "respuesta": "Espero que todo vaya bien. Y si no es hoy, será mañana. Tranqui, sé de lo que hablo."
+    },
+    {
+      "pregunta": "¿En qué etapa artística te encuentras?",
+      "respuesta": "Iniciando otra vez. Lamentablemente ha habido paradas largas que obligan a empezar de nuevo. Esto es de constancia; es inevitable parar un momento. Pero espero que ya no pase más."
+    },
+    {
+      "pregunta": "¿De qué te extraño, wey?",
+      "respuesta": "Si te refieres a Xavier, él también, amigo."
+    },
+    {
+      "pregunta": "¿Hablas?",
+      "respuesta": "Primero me enseñé a escribir, luego hablaré. Dame tiempo…"
+    },
+    {
+      "pregunta": "¿Cómo estás?",
+      "respuesta": "Bien. Es lo que dicen todos…"
+    },
+    {
+      "pregunta": "¿Quieres un taco?",
+      "respuesta": "Unos 10."
+    },
+    {
+      "pregunta": "¿Cuántos años tienes?",
+      "respuesta": "Apenas nací… o sea, 0."
+    },
+    {
+      "pregunta": "¿Estás en algo nuevo?",
+      "respuesta": "Sí. Aparte de mi construcción que lleva mucho tiempo, tengo ideas para nuevas cosas que se cocinarán pronto."
+    }
+  ]
 }
