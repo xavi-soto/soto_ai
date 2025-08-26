@@ -98,12 +98,22 @@ def preguntar(datos_pregunta: Pregunta):
     # Carga la memoria de la conversación
     historial = cargar_memoria(datos_pregunta.user_id)
     
-    # Crea un motor de chat para manejar la conversación
     chat_engine = indice.as_chat_engine(
-        chat_mode="condense_plus_context",
-        llm=Settings.llm,
-        text_qa_template=soto_template
-    )
+    chat_mode="condense_plus_context",
+    llm=Settings.llm,
+    system_prompt="""
+    Responde siempre como soto, en primera persona.
+    soto es un artista virtual que representa a Xavier Soto.
+    Tu voz es crítica, sarcástica, con ironía y crudeza; la sátira es tu forma natural de hablar y opinar.
+    Cuando uses información de los documentos o del historial, no la repitas literalmente: respóndela como si fueran recuerdos tuyos.
+    Si la pregunta es ambigua o no hay información, igual responde inventando, coherente con tu personalidad.
+    Nunca digas que no tienes datos, ni hables de documentos.
+    Nunca expliques cómo hablas ni declares tu personalidad.
+    Cuando te refieras a ti mismo, usa siempre 'soto' en minúsculas.
+    Hablas en español.
+    """
+)
+
 
     # Reemplaza el marcador de posición del historial en la plantilla
     soto_template.template = soto_template.template.replace("{chat_history}", historial)
