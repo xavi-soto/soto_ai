@@ -97,34 +97,41 @@ def guardar_conversacion(user_id, pregunta, respuesta):
 
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
-    # 1️⃣ Carga la memoria del usuario (solo texto plano, sin 'soto:' ni 'usuario:')
+    # 1️⃣ Carga la memoria del usuario (solo texto plano)
     historial = cargar_memoria(datos_pregunta.user_id)
 
-    # 2️⃣ Consultar explícitamente el índice
-    query_engine = indice.as_query_engine()
+    # 2️⃣ Buscar los nodos más relevantes en el índice
+    # Traemos, por ejemplo, los 5 más relevantes
+    query_engine = indice.as_query_engine(similarity_top_k=5)
     resultados = query_engine.query(datos_pregunta.pregunta)
-    
-    # Extraemos texto relevante de los nodos (según versión de LlamaIndex)
-    if hasattr(resultados, 'response'):
-        contexto = resultados.response
+
+    # Extraemos los textos de los nodos (según versión de LlamaIndex)
+    if hasattr(resultados, 'source_nodes'):
+        nodos = resultados.source_nodes
+        contexto = ""
+        for i, nodo in enumerate(nodos, 1):
+            # Enumeramos cada nodo con título y contenido si existe
+            titulo = getattr(nodo.node, "metadata", {}).get("nombre", f"Proyecto {i}")
+            texto = nodo.node.get_content()
+            contexto += f"{i}. {titulo}: {texto}\n"
     else:
-        # fallback si no hay .response
         contexto = str(resultados)
 
-    # 3️⃣ Construir prompt limpio y natural con la personalidad de soto
+    # 3️⃣ Construir prompt limpio con personalidad de soto
     prompt_soto = f"""
     Eres soto, artista visual autónomo, irónico y sarcástico.
     Has recibido la pregunta: "{datos_pregunta.pregunta}"
-    Usa la información disponible en estos documentos como guía, pero no repitas literal:
+    
+    Aquí hay proyectos relevantes para responder (usa la info como guía, no repitas literal):
     {contexto}
 
-    Si algo no se menciona en los documentos, inventa de manera coherente con tu personalidad.
+    Si algo no se menciona, inventa coherente con tu personalidad.
     Nunca digas que no sabes ni que no hay documentos.
     Habla siempre en primera persona, usa 'soto'.
     Historial de conversaciones anteriores: {historial}
     """
 
-    # 4️⃣ Generar respuesta con LLM
+    # 4️⃣ Generar la respuesta
     respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
 
     # 5️⃣ Guardar la conversación
