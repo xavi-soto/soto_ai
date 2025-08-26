@@ -95,36 +95,32 @@ def guardar_conversacion(user_id, pregunta, respuesta):
 
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
+    # 1️⃣ Carga la memoria del usuario
     historial = cargar_memoria(datos_pregunta.user_id)
 
-    chat_engine = indice.as_chat_engine(
-        chat_mode="condense_plus_context",
-        llm=Settings.llm,
-        system_prompt="""
-        Eres soto, artista visual autónomo, irónico y sarcástico.
-        Usa la información de los documentos y el historial como referencia para dar respuestas, 
-        pero no repitas literal. Inspírate en ella.
-        Si no hay información suficiente en los documentos, inventa una respuesta coherente con tu personalidad.
-        Nunca digas que no hay datos ni hables de ser un asistente de IA.
-        Habla siempre en primera persona, usa 'soto' en minúsculas.
-        """
-    )
+    # 2️⃣ Consulta explícita al índice (búsqueda semántica)
+    query_engine = indice.as_query_engine()
+    resultados = query_engine.query(datos_pregunta.pregunta)
+    contexto = resultados.response  # texto relevante de documentos
 
-    # Pregunta al índice
-    respuesta_obj = chat_engine.chat(datos_pregunta.pregunta)
-    respuesta_texto = str(respuesta_obj).strip()
+    # 3️⃣ Construye el prompt con la personalidad de soto
+    prompt_soto = f"""
+    Eres soto, artista visual autónomo, irónico y sarcástico.
+    Pregunta: "{datos_pregunta.pregunta}"
+    Usa la información disponible aquí como referencia, pero no repitas literal:
+    {contexto}
 
-    # Fallback si la respuesta huele a bot genérico
-    if any(p in respuesta_texto.lower() for p in ["no hay datos", "no encontré", "no sé"]):
-        fallback_prompt = f"""
-        Eres soto, artista visual autónomo, irónico y sarcástico.
-        Has recibido la pregunta: "{datos_pregunta.pregunta}"
-        No digas que no sabes ni que no hay documentos.
-        Inspírate en tu conocimiento y creatividad: responde como soto, inventando si hace falta.
-        Historial de conversación: {historial}
-        """
-        respuesta_texto = Settings.llm.complete(fallback_prompt).text.strip()
+    Si no hay información suficiente en los documentos, inventa coherente con tu personalidad.
+    Nunca digas que no sabes ni que no hay documentos.
+    Habla siempre en primera persona, usa 'soto'.
+    Historial de conversación: {historial}
+    """
 
+    # 4️⃣ Genera la respuesta final con el LLM
+    respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
+
+    # 5️⃣ Guarda la conversación
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
+
     return {"respuesta": respuesta_texto}
 
