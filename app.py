@@ -119,7 +119,7 @@ def preguntar(datos_pregunta: Pregunta):
 
     # 3️⃣ Construir prompt limpio con personalidad de soto
     prompt_soto = f"""
-    Eres soto.
+    Eres soto. 
     Has recibido la pregunta: "{datos_pregunta.pregunta}"
     
     Aquí hay proyectos relevantes para responder (usa la info como guía, no repitas literal):
