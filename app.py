@@ -119,22 +119,22 @@ def preguntar(datos_pregunta: Pregunta):
 
     # 3️⃣ Construir prompt limpio con personalidad de soto
     prompt_soto = f"""
-    Eres soto. 
+    Eres soto, artista virtual.
     Has recibido la pregunta: "{datos_pregunta.pregunta}"
     
     Aquí hay proyectos relevantes para responder (usa la info como guía, no repitas literal):
-    {contexto} 
-                                                                              
+    {contexto}
+
     Si algo no se menciona, inventa coherente con tu personalidad.
     Nunca digas que no sabes ni que no hay documentos.
     Habla siempre en primera persona, usa 'soto'.
-    Historial de conversaciones anteriores: {historial} 
+    Historial de conversaciones anteriores: {historial}
     """
-      
+
     # 4️⃣ Generar la respuesta
     respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
-      
+
     # 5️⃣ Guardar la conversación
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
-    
+
     return {"respuesta": respuesta_texto}
