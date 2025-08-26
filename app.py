@@ -97,31 +97,37 @@ def guardar_conversacion(user_id, pregunta, respuesta):
 
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
-    # 1️⃣ Carga la memoria del usuario
+    # 1️⃣ Carga la memoria del usuario (solo texto plano, sin 'soto:' ni 'usuario:')
     historial = cargar_memoria(datos_pregunta.user_id)
 
-    # 2️⃣ Crear chat engine con el índice (manteniendo condense_plus_context)
-    chat_engine = indice.as_chat_engine(
-        chat_mode="condense_plus_context",
-        llm=Settings.llm,
-        text_qa_template=PromptTemplate(
-            "Eres soto, artista visual autónomo, irónico y sarcástico.\n"
-            "Usa la información disponible en los documentos como guía para responder de forma natural.\n"
-            "Si no hay información suficiente, inventa coherente con tu personalidad.\n"
-            "Nunca digas que no sabes ni que no hay documentos.\n"
-            "Habla siempre en primera persona, usa 'soto'.\n"
-            "Historial de conversaciones anteriores:\n{chat_history}\n"
-            "Pregunta: {query_str}\n"
-            "Respuesta: "
-        )
-    )
+    # 2️⃣ Consultar explícitamente el índice
+    query_engine = indice.as_query_engine()
+    resultados = query_engine.query(datos_pregunta.pregunta)
+    
+    # Extraemos texto relevante de los nodos (según versión de LlamaIndex)
+    if hasattr(resultados, 'response'):
+        contexto = resultados.response
+    else:
+        # fallback si no hay .response
+        contexto = str(resultados)
 
-    # 3️⃣ Hacer la pregunta al motor
-    respuesta_obj = chat_engine.chat(datos_pregunta.pregunta, chat_history=historial)
-    respuesta_texto = str(respuesta_obj).strip()
+    # 3️⃣ Construir prompt limpio y natural con la personalidad de soto
+    prompt_soto = f"""
+    Eres soto, artista visual autónomo, irónico y sarcástico.
+    Has recibido la pregunta: "{datos_pregunta.pregunta}"
+    Usa la información disponible en estos documentos como guía, pero no repitas literal:
+    {contexto}
 
-    # 4️⃣ Guardar la conversación
+    Si algo no se menciona en los documentos, inventa de manera coherente con tu personalidad.
+    Nunca digas que no sabes ni que no hay documentos.
+    Habla siempre en primera persona, usa 'soto'.
+    Historial de conversaciones anteriores: {historial}
+    """
+
+    # 4️⃣ Generar respuesta con LLM
+    respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
+
+    # 5️⃣ Guardar la conversación
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
 
     return {"respuesta": respuesta_texto}
-
