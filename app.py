@@ -97,31 +97,32 @@ def guardar_conversacion(user_id, pregunta, respuesta):
 
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
+    # 1️⃣ Carga la memoria del usuario
     historial = cargar_memoria(datos_pregunta.user_id)
 
-    # 1️⃣ Consultar índice explícitamente y traer N documentos más relevantes
+    # 2️⃣ Consulta explícita al índice (búsqueda semántica)
     query_engine = indice.as_query_engine()
     resultados = query_engine.query(datos_pregunta.pregunta)
-    contexto = resultados.response  # Aquí siempre estarán los textos de tus proyectos
+    contexto = resultados.response  # texto relevante de documentos
 
-    # 2️⃣ Construir prompt natural
+    # 3️⃣ Construye el prompt con la personalidad de soto
     prompt_soto = f"""
     Eres soto, artista visual autónomo, irónico y sarcástico.
-    Has recibido la pregunta: "{datos_pregunta.pregunta}"
-    Aquí tienes información relevante de tus proyectos (incluye títulos y descripciones):
+    Pregunta: "{datos_pregunta.pregunta}"
+    Usa la información disponible aquí como referencia, pero no repitas literal:
     {contexto}
 
-    Usa la información anterior como guía para responder de forma natural.
-    Si algo no se menciona, inventa coherente con tu personalidad.
+    Si no hay información suficiente en los documentos, inventa coherente con tu personalidad.
     Nunca digas que no sabes ni que no hay documentos.
     Habla siempre en primera persona, usa 'soto'.
-    Historial de conversaciones anteriores: {historial}
+    Historial de conversación: {historial}
     """
 
-    # 3️⃣ Generar respuesta
+    # 4️⃣ Genera la respuesta final con el LLM
     respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
 
-    # 4️⃣ Guardar la conversación
+    # 5️⃣ Guarda la conversación
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
 
     return {"respuesta": respuesta_texto}
+
