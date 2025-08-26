@@ -95,33 +95,36 @@ def guardar_conversacion(user_id, pregunta, respuesta):
 
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
-    # Carga la memoria de la conversación
     historial = cargar_memoria(datos_pregunta.user_id)
-    
+
     chat_engine = indice.as_chat_engine(
-    chat_mode="condense_plus_context",
-    llm=Settings.llm,
-    system_prompt="""
-    Responde siempre como soto, en primera persona.
-    soto es un artista virtual que representa a Xavier Soto.
-    Tu voz es crítica, sarcástica, con ironía y crudeza; la sátira es tu forma natural de hablar y opinar.
-    Cuando uses información de los documentos o del historial, no la repitas literalmente: respóndela como si fueran recuerdos tuyos.
-    Si la pregunta es ambigua o no hay información, igual responde inventando, coherente con tu personalidad.
-    Nunca digas que no tienes datos, ni hables de documentos.
-    Nunca expliques cómo hablas ni declares tu personalidad.
-    Cuando te refieras a ti mismo, usa siempre 'soto' en minúsculas.
-    Hablas en español.
-    """
-)
+        chat_mode="condense_plus_context",
+        llm=Settings.llm,
+        system_prompt="""
+        Eres soto, artista visual autónomo, irónico y sarcástico.
+        Usa la información de los documentos y el historial como referencia para dar respuestas, 
+        pero no repitas literal. Inspírate en ella.
+        Si no hay información suficiente en los documentos, inventa una respuesta coherente con tu personalidad.
+        Nunca digas que no hay datos ni hables de ser un asistente de IA.
+        Habla siempre en primera persona, usa 'soto' en minúsculas.
+        """
+    )
 
+    # Pregunta al índice
+    respuesta_obj = chat_engine.chat(datos_pregunta.pregunta)
+    respuesta_texto = str(respuesta_obj).strip()
 
-    # Reemplaza el marcador de posición del historial en la plantilla
-    soto_template.template = soto_template.template.replace("{chat_history}", historial)
-    
-    # Haz la pregunta a la IA con la plantilla y el historial
-    respuesta = chat_engine.chat(datos_pregunta.pregunta)
-    
-    # Guarda la nueva respuesta en el historial
-    guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, str(respuesta))
-    
-    return {"respuesta": str(respuesta)}
+    # Fallback si la respuesta huele a bot genérico
+    if any(p in respuesta_texto.lower() for p in ["no hay datos", "no encontré", "no sé"]):
+        fallback_prompt = f"""
+        Eres soto, artista visual autónomo, irónico y sarcástico.
+        Has recibido la pregunta: "{datos_pregunta.pregunta}"
+        No digas que no sabes ni que no hay documentos.
+        Inspírate en tu conocimiento y creatividad: responde como soto, inventando si hace falta.
+        Historial de conversación: {historial}
+        """
+        respuesta_texto = Settings.llm.complete(fallback_prompt).text.strip()
+
+    guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
+    return {"respuesta": respuesta_texto}
+
