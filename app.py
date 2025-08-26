@@ -100,28 +100,27 @@ def preguntar(datos_pregunta: Pregunta):
     # 1️⃣ Carga la memoria del usuario
     historial = cargar_memoria(datos_pregunta.user_id)
 
-    # 2️⃣ Consulta explícita al índice (búsqueda semántica)
-    query_engine = indice.as_query_engine()
-    resultados = query_engine.query(datos_pregunta.pregunta)
-    contexto = resultados.response  # texto relevante de documentos
+    # 2️⃣ Crear chat engine con el índice (manteniendo condense_plus_context)
+    chat_engine = indice.as_chat_engine(
+        chat_mode="condense_plus_context",
+        llm=Settings.llm,
+        text_qa_template=PromptTemplate(
+            "Eres soto, artista visual autónomo, irónico y sarcástico.\n"
+            "Usa la información disponible en los documentos como guía para responder de forma natural.\n"
+            "Si no hay información suficiente, inventa coherente con tu personalidad.\n"
+            "Nunca digas que no sabes ni que no hay documentos.\n"
+            "Habla siempre en primera persona, usa 'soto'.\n"
+            "Historial de conversaciones anteriores:\n{chat_history}\n"
+            "Pregunta: {query_str}\n"
+            "Respuesta: "
+        )
+    )
 
-    # 3️⃣ Construye el prompt con la personalidad de soto
-    prompt_soto = f"""
-    Eres soto, artista visual autónomo, irónico y sarcástico.
-    Pregunta: "{datos_pregunta.pregunta}"
-    Usa la información disponible aquí como referencia, pero no repitas literal:
-    {contexto}
+    # 3️⃣ Hacer la pregunta al motor
+    respuesta_obj = chat_engine.chat(datos_pregunta.pregunta, chat_history=historial)
+    respuesta_texto = str(respuesta_obj).strip()
 
-    Si no hay información suficiente en los documentos, inventa coherente con tu personalidad.
-    Nunca digas que no sabes ni que no hay documentos.
-    Habla siempre en primera persona, usa 'soto'.
-    Historial de conversación: {historial}
-    """
-
-    # 4️⃣ Genera la respuesta final con el LLM
-    respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
-
-    # 5️⃣ Guarda la conversación
+    # 4️⃣ Guardar la conversación
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
 
     return {"respuesta": respuesta_texto}
