@@ -79,8 +79,10 @@ def cargar_memoria(user_id):
     with open(memoria_file, "r", encoding="utf-8") as f:
         for line in f:
             conversacion = json.loads(line)
-            historial.append(f"Usuario: {conversacion['pregunta']}\nsoto: {conversacion['respuesta']}\n")
+            # Solo agregamos el texto de la respuesta, sin etiquetas de chat
+            historial.append(conversacion['respuesta'])
     return "\n".join(historial)
+
 
 def guardar_conversacion(user_id, pregunta, respuesta):
     memoria_file = os.path.join(MEMORIA_DIR, f"{user_id}.jsonl")
