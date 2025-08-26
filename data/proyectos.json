@@ -1,84 +1,84 @@
 {
   "proyectos": [
     {
-      "nombre": "De hoy para mañana",
+      "nombre": "De hoy para mañana",  
       "descripcion": " Mi último trabajo. y más relevante hasta ahora. El proyecto nace con una complicidad de Cómo viajar con un salmón, de Umberto Eco. Germina la necesidad de evidenciar lo absurdo, no como burla, sino como espejo, mostrando que lo nimio también exige su memoria. Es un proyecto interminable, siempre habrá hechos ridículos y triviales que merezcan ser fijados en el grafito.",
       "tecnica_y_medios": "Dibujos en lápiz y carboncillo, a veces con hollín. La variación de durezas y suavidades en el lápiz dialoga con el negro áspero del carbón, generando contrastes que sostienen la pieza. Las medidas no están predeterminadas: cada papel dicta su propio límite.",
       "presentacion": "Se ha presentado en Valencia y Madrid. En cada exhibición comparezco no solo como autor, sino como testigo de esas pequeñas absurdidades que persisten en lo cotidiano.",
       "informacion_adicional": "Si deseas adentrarte más, visita la web."
     },
-    {
-      "nombre": "Desoído",
+    { 
+      "nombre": "Desoído",  
       "descripcion": "Proyecto digital, una aplicación móvil construida como un rompecabezas sonoro. Se origina en el repositorio de sonidos en peligro de extinción de la Fonoteca Nacional de México. A partir de entrevistas, se investigan los recuerdos de sonidos que ya no existen, analizando las consecuencias de esa pérdida y las mutaciones de nuestro espacio sonoro.",
       "conceptos_clave": "Juego, rompecabezas sonoro, memoria, sonidos extintos.",
       "personajes": [
         {"nombre": "Ue Ue", "descripcion": "Un personaje central inspirado en Huehuecóyotl, el “coyote viejo” de la cultura mexica, dios vinculado con la música, la danza, el arte, la astucia y la narración. En el juego, es el guardián de los sonidos extintos, pero solo los percibe como dibujos. El objetivo del jugador es devolverles voz."},
         {"nombre": "El mensajero", "descripcion": "Guía al jugador, ofrece instrucciones y acompaña en la búsqueda."}
-      ],
+      ],  
       "estado_actual": "El juego alcanzó una fase preliminar en la Play Store y estuvo disponible por un tiempo. Actualmente se encuentra en proceso de reestructuración, con nuevos niveles y mecánicas, en camino a un próximo relanzamiento."
-    },
+    },   
     {
-      "nombre": "¿Por qué nos cuesta escuchar?",
+      "nombre": "¿Por qué nos cuesta escuchar?",  
       "descripcion": "Este proyecto dio origen a Desoído. Está sustentado en los archivos de la Fonoteca Nacional de México, en su repositorio de sonidos en peligro de extinción. La pieza se materializa como una app móvil que funciona como control y se vincula directamente a TouchDesigner.",
       "tecnica_y_medios": "La app corre como un juego: el objetivo es encontrar el sonido perdido mediante la búsqueda de la frecuencia correcta. TouchDesigner genera visuales y modulaciones sonoras que te indican si estás más cerca o más lejos del sonido.",
       "nivel_y_expansion": "Se compone de tres niveles. Se presentó como un prototipo, pero abre muchas posibilidades para expandirse en el futuro."
     },
     {
-      "nombre": "Chingaderas en la ventana",
+      "nombre": "Chingaderas en la ventana",  
       "descripcion": "Es un proyecto vivo, aún en curso. Un juego hecho con código en p5.js. Las ilustraciones, al pasar por ese filtro, se deforman y se reconocen. Es una forma distinta de procesar la imagen, de dejar que lo digital meta la mano en lo íntimo del trazo.",
       "tecnica_y_medios": "Código en p5.js con ilustraciones.",
       "estado_actual": "Es un proyecto vivo, aún en curso. Un experimento, pero también una grieta: donde lo cotidiano se tuerce y revela otra forma de mirar."
-    },
+    }, 
     {
-      "nombre": "Estudio de objetos no identificados",
+      "nombre": "Estudio de objetos no identificados",  
       "descripcion": "Un proyecto de modelado en Blender que indaga en cómo miramos las cosas y cómo las cosas nos devuelven la mirada. Parte de lo simple y avanza hacia lo complejo: el sitio, el contexto, las resonancias culturales que se enredan alrededor de cada objeto.",
       "tecnica_y_medios": "Modelado en Blender."
     },
     {
-      "nombre": "Espacios comunes",
+      "nombre": "Espacios comunes",  
       "descripcion": "Un ejercicio en tiempo real, múltiples rincones de mi casa dibujados con grafito. Una especie de cartografía doméstica hecha a mano.",
       "informacion_adicional": "Uno de los trazos terminó sirviendo como impresión para el proyecto 'De hoy para mañana', porque al final todo estaba conectado."
     },
     {
-      "nombre": "Hay flores a domicilio",
+      "nombre": "Hay flores a domicilio",  
       "descripcion": "Un proyecto que nació en plena pandemia. De la observación de cómo las flores crecían, surgió la idea: mientras afuera todo era incierto, dentro de casa la vida brotaba con naturalidad. Un contraste irónico que afectaba a todos.",
       "tecnica_y_medios": "Ilustraciones con una mezcla de mi trazo y lo digital, con color, pero de forma no abrasiva. Un gesto esperanzador en medio de la pausa."
     },
     {
-      "nombre": "Ya soy artista",
+      "nombre": "Ya soy artista",  
       "descripcion": "Reúne los trabajos de mi paso por la facultad de artes, con la gran interrogante: ¿valió la pena esos años? La pieza central es un panel de 4 metros con la pregunta lanzada con aerosol. Se expuso en la calle.",
       "conceptos_clave": "La obra cuestiona si me considerarían artista viendo mis trabajos. La pregunta sigue abierta.",
       "informacion_adicional": "El proyecto fue apoyado por la Secretaría de Cultura Jalisco."
     },
     {
-      "nombre": "Inmenso",
+      "nombre": "Inmenso",  
       "descripcion": "Una trilogía de ilustraciones que explora el camino, los espacios y lo pequeños que somos ante múltiples situaciones. El camino debe recorrerse, disfrutarse, porque no hay otro.",
       "informacion_adicional": "Estas ilustraciones recibieron Mención del Jurado en el Premio a la Ilustración Latinoamericana."
     },
     {
-      "nombre": "Algunas cosas",
+      "nombre": "Algunas cosas",  
       "descripcion": "Ejercicios de ilustración. Fue la primera vez que establecí una idea de ilustrar y de generar mi técnica con mi propio lenguaje. Son imágenes que hablan de lo onírico, lo mágico y hasta lo astral.",
       "tecnica_y_medios": "Piezas donde exploré el color, usando una paleta más amplia pero cuidando la armonía y la congruencia entre tonos."
     },
     {
-      "nombre": "No solo es tiempo",
+      "nombre": "No solo es tiempo",  
       "descripcion": "Un proyecto realizado en Blanca, España, durante una residencia en Centro Negra. Vinculado al espacio y su historia, buscaba evidenciar cómo el paso del tiempo guarda recuerdos y memorias que solo las calles y los espacios conservan.",
       "tecnica_y_medios": "En un lienzo, tomé los colores de las calles y grafitis, perpetuando las historias del tiempo. La instalación final representaba un recorrido real, trazado con tiza elaborada con la misma tierra del pueblo.",
       "informacion_adicional": "Esta residencia contó con el apoyo de la Secretaría de Cultura Jalisco."
     },
     {
-      "nombre": "Apariencias",
+      "nombre": "Apariencias",  
       "descripcion": "Son ilustraciones basadas en el trazo, con una estética cercana al uso del estilógrafo. Los títulos jugaron un papel importante, describiendo cada situación como viñetas o pequeñas historias en un solo trazo.",
       "tecnica_y_medios": "Ilustraciones con estética de estilógrafo."
-    },
+    }, 
     {
-      "nombre": "Silueta de olvido",
+      "nombre": "Silueta de olvido", 
       "descripcion": "Fue mi primer proyecto conceptual. Aborda la gentrificación, centrada en el barrio del Carmen, en Murcia. Explora cómo el descuido urbano se manifiesta de forma intencional.",
       "conceptos_clave": "Se establece una analogía entre el abandono del espacio y la silueta de la policía en la escena de un crimen, vinculando la pérdida de la memoria del barrio.",
       "informacion_adicional": "Las referencias estaban solo en inglés en ese momento, lo que lo hacía un concepto poco conocido."
-    },
+    },  
     {
-      "nombre": "Descripción de mi país",
+      "nombre": "Descripción de mi país", 
       "descripcion": "Ilustraciones inspiradas en mi lugar de origen y en cómo se desplazan las cosas en él. El objetivo es establecer un minimalismo que muestre solo lo esencial. Las piezas tienen un carácter poético y reflexivo.",
       "tecnica_y_medios": "Ilustraciones minimalistas y poéticas."
     }

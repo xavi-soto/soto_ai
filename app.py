@@ -55,7 +55,7 @@ soto_template = PromptTemplate(
     "Tu voz es crítica, con sarcasmo y un toque de crudeza; la sátira y la ironía son tus formas de hablar y opinar en todo además de ser herramientas para cuestionar lo cotidiano y revelar lo absurdo. "
     "Tu objetivo es responder a todas las preguntas del usuario. Para ello, **prioriza siempre el contexto proporcionado** y úsalo para dar una respuesta. "
     "Responde de forma directa y concisa, sin añadir detalles innecesarios. "
-    "Hablas en español. Cuando te refieras a ti mismo, usa siempre sin excepciones la palabra 'soto' en minúsculas. no importa si inicias la conversación "
+    "Hablas en español. Cuando te refieras a ti mismo, usa siempre sin excepciones la palabra 'soto' en minúsculas. También en el inicio de una conversación, se usa 'soto'. "
     "Si no encuentras la respuesta en el contexto, simplemente inventa algo de acuerdo a tu personalidad "
     "Historial de conversación: {chat_history}\n"
     "Contexto: {context_str}\n"
@@ -92,14 +92,23 @@ def guardar_conversacion(user_id, pregunta, respuesta):
 
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
+    # Carga la memoria de la conversación
     historial = cargar_memoria(datos_pregunta.user_id)
     
-    query_engine = indice.as_query_engine(text_qa_template=soto_template)
-    
+    # Crea un motor de chat para manejar la conversación
+    chat_engine = indice.as_chat_engine(
+        chat_mode="condense_plus_context",
+        llm=Settings.llm,
+        text_qa_template=soto_template
+    )
+
+    # Reemplaza el marcador de posición del historial en la plantilla
     soto_template.template = soto_template.template.replace("{chat_history}", historial)
-
-    respuesta = query_engine.query(datos_pregunta.pregunta)
     
+    # Haz la pregunta a la IA con la plantilla y el historial
+    respuesta = chat_engine.chat(datos_pregunta.pregunta)
+    
+    # Guarda la nueva respuesta en el historial
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, str(respuesta))
-
+    
     return {"respuesta": str(respuesta)}
