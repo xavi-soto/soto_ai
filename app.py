@@ -95,6 +95,12 @@ def guardar_conversacion(user_id, pregunta, respuesta):
         f.write(json.dumps(conversacion, ensure_ascii=False) + "\n")
     print("Conversación guardada.")
 
+    # --- Ruta raíz para monitoreo (UptimeRobot) ---
+@app.get("/")
+def read_root():
+    return {"status": "ok", "message": "soto API is alive 🚀"}
+
+
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
     # 1️⃣ Carga la memoria del usuario (solo texto plano)
