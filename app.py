@@ -169,3 +169,13 @@ def preguntar(datos_pregunta: Pregunta):
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
 
     return {"respuesta": respuesta_texto}
+
+@app.get("/verdb")
+def ver_db():
+    import sqlite3
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("SELECT * FROM conversaciones")
+    rows = c.fetchall()
+    conn.close()
+    return {"conversaciones": rows}
