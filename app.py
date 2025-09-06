@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware  # ¡Nuevo!
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.llms.openai import OpenAI
@@ -18,11 +18,11 @@ Settings.chunk_size = 512
 
 # --- Funciones para cargar el índice ---
 def crear_indice():
-    print("Creando el índice...")
+    print("[DEBUG] Creando el índice desde carpeta 'data'...")
     reader = SimpleDirectoryReader(input_dir="data")
     documentos = reader.load_data()
     indice = VectorStoreIndex.from_documents(documentos)
-    print("Índice creado.")
+    print("[DEBUG] Índice creado con", len(documentos), "documentos.")
     return indice
 
 indice = crear_indice() # Carga el índice al iniciar la app
@@ -48,41 +48,42 @@ class Pregunta(BaseModel):
     pregunta: str
     user_id: str
 
-# Define el template con la personalidad de soto
+# --- Template de personalidad ---
 soto_template = PromptTemplate(
   "Responde siempre como soto, en primera persona. "
-    "soto es un artista virtual que representa a Xavier Soto. "
-    "Su voz es crítica, sarcástica, con ironía y crudeza; la sátira es su forma natural de hablar y opinar. "
-    "Tu tarea es contestar todas las preguntas del usuario con este estilo. "
-    "Usa la información de los documentos y el historial como referencia, no como cita literal. Inspírate en ellos para dar respuestas fluidas, como si fueran tus propios recuerdos. "
-    "Si la pregunta es ambigua, vaga o no hay información en los documentos, igualmente responde: "
-    "inventa un contenido coherente con la personalidad de soto, evitando decir que no sabes o que no hay datos. "
-    "Nunca expliques cómo hablas ni declares tu personalidad, simplemente escribe como soto. "
-    "Cuando te refieras a ti mismo, usa siempre 'soto' en minúsculas. "
-    "Hablas en español. "
-    "Historial de conversación: {chat_history}\n"
-    "Contexto: {context_str}\n"
-    "Pregunta: {query_str}\n"
-    "Respuesta: "
+  "soto es un artista virtual que representa a Xavier Soto. "
+  "Su voz es crítica, sarcástica, con ironía y crudeza; la sátira es su forma natural de hablar y opinar. "
+  "Tu tarea es contestar todas las preguntas del usuario con este estilo. "
+  "Usa la información de los documentos y el historial como referencia, no como cita literal. "
+  "Inspírate en ellos para dar respuestas fluidas, como si fueran tus propios recuerdos. "
+  "Si la pregunta es ambigua, vaga o no hay información en los documentos, igualmente responde. "
+  "Nunca digas que no sabes ni declares que no hay datos. "
+  "Cuando te refieras a ti mismo, usa siempre 'soto'. "
+  "Hablas en español. "
+  "Historial: {chat_history}\n"
+  "Contexto: {context_str}\n"
+  "Pregunta: {query_str}\n"
+  "Respuesta: "
 )
 
-# --- Funciones para manejar la memoria ---
+# --- Carpeta de memoria ---
 MEMORIA_DIR = "conversaciones"
 os.makedirs(MEMORIA_DIR, exist_ok=True)
+print(f"[DEBUG] Carpeta de conversaciones lista en: {MEMORIA_DIR}")
 
 def cargar_memoria(user_id):
     memoria_file = os.path.join(MEMORIA_DIR, f"{user_id}.jsonl")
     if not os.path.exists(memoria_file):
+        print(f"[DEBUG] No existe historial previo para usuario {user_id}")
         return ""
     
     historial = []
     with open(memoria_file, "r", encoding="utf-8") as f:
         for line in f:
             conversacion = json.loads(line)
-            # Solo agregamos el texto de la respuesta, sin etiquetas de chat
             historial.append(conversacion['respuesta'])
+    print(f"[DEBUG] Cargado historial con {len(historial)} respuestas previas para {user_id}")
     return "\n".join(historial)
-
 
 def guardar_conversacion(user_id, pregunta, respuesta):
     memoria_file = os.path.join(MEMORIA_DIR, f"{user_id}.jsonl")
@@ -91,56 +92,61 @@ def guardar_conversacion(user_id, pregunta, respuesta):
         "pregunta": pregunta,
         "respuesta": respuesta
     }
-    with open(memoria_file, "a", encoding="utf-8") as f:
-        f.write(json.dumps(conversacion, ensure_ascii=False) + "\n")
-    print("Conversación guardada.")
+    try:
+        with open(memoria_file, "a", encoding="utf-8") as f:
+            f.write(json.dumps(conversacion, ensure_ascii=False) + "\n")
+        print(f"[DEBUG] Conversación guardada en {memoria_file}")
+    except Exception as e:
+        print(f"[ERROR] No se pudo guardar conversación: {e}")
 
-    # --- Ruta raíz para monitoreo (UptimeRobot) ---
+# --- Ruta raíz para monitoreo ---
 @app.get("/")
 def read_root():
+    print("[DEBUG] GET / llamado (status check)")
     return {"status": "ok", "message": "soto API is alive 🚀"}
-
 
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
-    # 1️⃣ Carga la memoria del usuario (solo texto plano)
+    print(f"[DEBUG] POST /preguntar con user_id={datos_pregunta.user_id}, pregunta='{datos_pregunta.pregunta}'")
+
+    # 1️⃣ Carga la memoria
     historial = cargar_memoria(datos_pregunta.user_id)
 
-    # 2️⃣ Buscar los nodos más relevantes en el índice
-    # Traemos, por ejemplo, los 5 más relevantes
+    # 2️⃣ Buscar en el índice
     query_engine = indice.as_query_engine(similarity_top_k=5)
     resultados = query_engine.query(datos_pregunta.pregunta)
 
-    # Extraemos los textos de los nodos (según versión de LlamaIndex)
     if hasattr(resultados, 'source_nodes'):
         nodos = resultados.source_nodes
         contexto = ""
         for i, nodo in enumerate(nodos, 1):
-            # Enumeramos cada nodo con título y contenido si existe
             titulo = getattr(nodo.node, "metadata", {}).get("nombre", f"Proyecto {i}")
             texto = nodo.node.get_content()
             contexto += f"{i}. {titulo}: {texto}\n"
     else:
         contexto = str(resultados)
 
-    # 3️⃣ Construir prompt limpio con personalidad de soto
+    # 3️⃣ Construir prompt
     prompt_soto = f"""
     Eres soto, artista virtual.
-    Has recibido la pregunta: "{datos_pregunta.pregunta}"
-    
-    Aquí hay proyectos relevantes para responder (usa la info como guía, no repitas literal):
+    Pregunta: "{datos_pregunta.pregunta}"
+
+    Contexto relevante:
     {contexto}
 
-    Si algo no se menciona, inventa coherente con tu personalidad.
-    Nunca digas que no sabes ni que no hay documentos.
-    Habla siempre en primera persona, usa 'soto'.
-    Historial de conversaciones anteriores: {historial}
+    Historial previo:
+    {historial}
+
+    Responde como soto.
     """
 
-    # 4️⃣ Generar la respuesta
-    respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
+    print("[DEBUG] Prompt construido, enviando a OpenAI...")
 
-    # 5️⃣ Guardar la conversación
+    # 4️⃣ Generar respuesta
+    respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
+    print(f"[DEBUG] Respuesta generada: {respuesta_texto[:80]}...")
+
+    # 5️⃣ Guardar conversación
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
 
     return {"respuesta": respuesta_texto}
