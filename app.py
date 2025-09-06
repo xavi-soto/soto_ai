@@ -5,8 +5,9 @@ from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.llms.openai import OpenAI
 from llama_index.core.prompts import PromptTemplate
 import os
-import json
+import sqlite3   # 👈 nuevo: para usar SQLite
 from datetime import datetime
+
 
 # --- Configuración de OpenAI ---
 if not os.getenv("OPENAI_API_KEY"):
@@ -66,38 +67,56 @@ soto_template = PromptTemplate(
   "Respuesta: "
 )
 
-# --- Carpeta de memoria ---
-MEMORIA_DIR = "conversaciones"
-os.makedirs(MEMORIA_DIR, exist_ok=True)
-print(f"[DEBUG] Carpeta de conversaciones lista en: {MEMORIA_DIR}")
+# --- Base de datos SQLite ---
+DB_FILE = "conversaciones.db"
+
+def init_db():
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS conversaciones (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id TEXT,
+            pregunta TEXT,
+            respuesta TEXT,
+            timestamp TEXT
+        )
+    """)
+    conn.commit()
+    conn.close()
+    print(f"[DEBUG] Base de datos lista en {DB_FILE}")
+
+init_db()
+
 
 def cargar_memoria(user_id):
-    memoria_file = os.path.join(MEMORIA_DIR, f"{user_id}.jsonl")
-    if not os.path.exists(memoria_file):
-        print(f"[DEBUG] No existe historial previo para usuario {user_id}")
-        return ""
-    
-    historial = []
-    with open(memoria_file, "r", encoding="utf-8") as f:
-        for line in f:
-            conversacion = json.loads(line)
-            historial.append(conversacion['respuesta'])
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("""
+        SELECT respuesta FROM conversaciones
+        WHERE user_id = ?
+        ORDER BY timestamp DESC
+        LIMIT 10
+    """, (user_id,))
+    rows = c.fetchall()
+    conn.close()
+
+    historial = [r[0] for r in rows]
     print(f"[DEBUG] Cargado historial con {len(historial)} respuestas previas para {user_id}")
     return "\n".join(historial)
 
+
 def guardar_conversacion(user_id, pregunta, respuesta):
-    memoria_file = os.path.join(MEMORIA_DIR, f"{user_id}.jsonl")
-    conversacion = {
-        "timestamp": datetime.now().isoformat(),
-        "pregunta": pregunta,
-        "respuesta": respuesta
-    }
-    try:
-        with open(memoria_file, "a", encoding="utf-8") as f:
-            f.write(json.dumps(conversacion, ensure_ascii=False) + "\n")
-        print(f"[DEBUG] Conversación guardada en {memoria_file}")
-    except Exception as e:
-        print(f"[ERROR] No se pudo guardar conversación: {e}")
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    c.execute("""
+        INSERT INTO conversaciones (user_id, pregunta, respuesta, timestamp)
+        VALUES (?, ?, ?, ?)
+    """, (user_id, pregunta, respuesta, datetime.now().isoformat()))
+    conn.commit()
+    conn.close()
+    print(f"[DEBUG] Conversación guardada en la base de datos para user_id={user_id}")
+
 
 # --- Ruta raíz para monitoreo ---
 @app.get("/")
