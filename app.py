@@ -7,6 +7,9 @@ from llama_index.core.prompts import PromptTemplate
 import os
 import sqlite3   # 👈 nuevo: para usar SQLite
 from datetime import datetime
+from fastapi.responses import HTMLResponse   # 👈 nuevo
+from fastapi import Query   # 👈 nuevo (para pasar el token por URL)
+
 
 
 # --- Configuración de OpenAI ---
@@ -170,12 +173,44 @@ def preguntar(datos_pregunta: Pregunta):
 
     return {"respuesta": respuesta_texto}
 
-@app.get("/verdb")
-def ver_db():
-    import sqlite3
+
+
+
+# --- Ruta para ver las conversaciones en HTML ---
+SECRET_TOKEN = os.getenv("DEBUG_TOKEN", "SOTO123")  # 👈 cambia en Render si quieres más seguridad
+
+@app.get("/verdb", response_class=HTMLResponse)
+def ver_db(token: str = Query(...)):
+    if token != SECRET_TOKEN:
+        return HTMLResponse("<h2>⛔ Acceso denegado</h2>", status_code=403)
+
     conn = sqlite3.connect(DB_FILE)
     c = conn.cursor()
-    c.execute("SELECT * FROM conversaciones")
+    c.execute("SELECT id, user_id, pregunta, respuesta, timestamp FROM conversaciones ORDER BY id DESC LIMIT 50")
     rows = c.fetchall()
     conn.close()
-    return {"conversaciones": rows}
+
+    html = """
+    <html>
+    <head>
+        <style>
+            body { font-family: Arial, sans-serif; padding: 20px; }
+            table { border-collapse: collapse; width: 100%; }
+            th, td { border: 1px solid #ddd; padding: 8px; }
+            th { background-color: #333; color: white; }
+            tr:nth-child(even) { background-color: #f2f2f2; }
+            td { vertical-align: top; }
+        </style>
+    </head>
+    <body>
+        <h2>📂 Conversaciones guardadas</h2>
+        <table>
+            <tr>
+                <th>ID</th><th>User</th><th>Pregunta</th><th>Respuesta</th><th>Timestamp</th>
+            </tr>
+    """
+    for row in rows:
+        html += f"<tr><td>{row[0]}</td><td>{row[1]}</td><td>{row[2]}</td><td>{row[3]}</td><td>{row[4]}</td></tr>"
+
+    html += "</table></body></html>"
+    return HTMLResponse(content=html)
