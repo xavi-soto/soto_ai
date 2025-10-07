@@ -126,6 +126,12 @@ def guardar_conversacion(user_id, pregunta, respuesta):
 def read_root():
     print("[DEBUG] GET / llamado (status check)")
     return {"status": "ok", "message": "soto API is alive 🚀"}
+# --- INICIO DEL CÓDIGO AÑADIDO ---
+@app.get("/health")
+def health_check():
+    print("[DEBUG] GET /health llamado (Uptime Robot check)")
+    return {"status": "ok"}
+# --- FIN DEL CÓDIGO AÑADIDO ---
 
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
