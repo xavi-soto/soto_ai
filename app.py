@@ -127,7 +127,7 @@ def read_root():
     print("[DEBUG] GET / llamado (status check)")
     return {"status": "ok", "message": "soto API is alive 🚀"}
 # --- INICIO DEL CÓDIGO AÑADIDO ---
-@app.get("/health")
+@app.api_route("/health", methods=["GET", "HEAD"])
 def health_check():
     print("[DEBUG] GET /health llamado (Uptime Robot check)")
     return {"status": "ok"}
