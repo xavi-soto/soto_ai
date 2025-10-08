@@ -179,7 +179,7 @@ def preguntar(datos_pregunta: Pregunta):
 SECRET_TOKEN = os.getenv("DEBUG_TOKEN", "SOTO123")
 
 @app.get("/verdb", response_class=HTMLResponse)
-def ver_db(token: str = Query(...)):
+def ver_db(token: str = Query(...), limite: int = Query(50)): # <--- CAMBIO AQUÍ
     if token != SECRET_TOKEN:
         return HTMLResponse("<h2>⛔ Acceso denegado</h2>", status_code=403)
 
