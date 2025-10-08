@@ -145,33 +145,28 @@ def health_check():
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
     print(f"[DEBUG] POST /preguntar con user_id={datos_pregunta.user_id}, pregunta='{datos_pregunta.pregunta}'")
+    
+    # 1. Carga el historial de conversación
     historial = cargar_memoria(datos_pregunta.user_id)
-    query_engine = indice.as_query_engine(similarity_top_k=5)
-    resultados = query_engine.query(datos_pregunta.pregunta)
-    if hasattr(resultados, 'source_nodes'):
-        nodos = resultados.source_nodes
-        contexto = ""
-        for i, nodo in enumerate(nodos, 1):
-            titulo = getattr(nodo.node, "metadata", {}).get("nombre", f"Proyecto {i}")
-            texto = nodo.node.get_content()
-            contexto += f"{i}. {titulo}: {texto}\n"
-    else:
-        contexto = str(resultados)
-    prompt_soto = f"""
-    Eres soto, artista virtual.
-    Pregunta: "{datos_pregunta.pregunta}"
+    
+    # 2. Inserta el historial en la plantilla de la personalidad
+    # Usamos una copia temporal para no modificar la plantilla global
+    prompt_con_historial = soto_template.partial_format(chat_history=historial)
 
-    Contexto relevante:
-    {contexto}
+    # 3. Crea el motor de consulta con la plantilla actualizada
+    query_engine = indice.as_query_engine(
+        text_qa_template=prompt_con_historial,
+        similarity_top_k=3  # Reducimos a 3 para obtener resultados más precisos
+    )
 
-    Historial previo:
-    {historial}
+    # 4. Llama a la IA. LlamaIndex se encargará de todo el proceso.
+    print("[DEBUG] Enviando consulta a LlamaIndex...")
+    respuesta = query_engine.query(datos_pregunta.pregunta)
+    respuesta_texto = str(respuesta).strip()
 
-    Responde como soto.
-    """
-    print("[DEBUG] Prompt construido, enviando a OpenAI...")
-    respuesta_texto = Settings.llm.complete(prompt_soto).text.strip()
     print(f"[DEBUG] Respuesta generada: {respuesta_texto[:80]}...")
+    
+    # 5. Guarda la conversación y devuelve la respuesta
     guardar_conversacion(datos_pregunta.user_id, datos_pregunta.pregunta, respuesta_texto)
     return {"respuesta": respuesta_texto}
 
