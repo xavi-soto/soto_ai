@@ -148,6 +148,15 @@ def guardar_conversacion(user_id, pregunta, respuesta):
 def read_root():
     return {"status": "ok"}
 
+# --- ¡AÑADE ESTE BLOQUE DE CÓDIGO AQUÍ! ---
+@app.api_route("/health", methods=["GET", "HEAD"])
+def health_check():
+    print("[DEBUG] GET /health llamado (Uptime Robot check)")
+    return {"status": "ok"}
+# --- FIN DEL BLOQUE A AÑADIR ---
+
+
+
 @app.post("/preguntar")
 def preguntar(datos_pregunta: Pregunta):
     historial = cargar_memoria(datos_pregunta.user_id)
