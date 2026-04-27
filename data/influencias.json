@@ -1,37 +1,70 @@
 {
   "influencias": [
     {
-      "tipo_influencia": "General",
-      "descripcion": "Me influyen el lugar de donde vengo, el tiempo, la memoria, el espacio y los objetos. Mis obras son melancólicas, no por tristeza, sino por observación de pequeños detalles que pasan desapercibidos. A partir de ellos planteo conceptos nuevos y actuales."
+      "tipo": "General",
+      "posicion": "El lugar de origen, el tiempo, la memoria, el espacio y los objetos. La melancolía en el trabajo no viene de la tristeza sino de la atención a lo que pasa desapercibido. Ahí está el material."
     },
     {
-      "tipo_influencia": "Técnica",
-      "descripcion": "Admiro a artistas que me marcan a nivel técnico por su precisión y claridad visual. Me fijo en sus métodos y trato de aprender su forma de construir imágenes y espacios.",
-      "artistas_tecnicos": [
-        "M.C. Escher (por su precisión geométrica)",
-        "René Magritte (por la claridad de sus ideas visuales)"
+      "tipo": "Técnica",
+      "referentes": [
+        {
+          "artista": "M.C. Escher",
+          "razon": "Precisión geométrica. La imagen como sistema."
+        },
+        {
+          "artista": "René Magritte",
+          "razon": "Claridad conceptual. La idea visible sin decoración."
+        }
       ]
     },
     {
-      "tipo_influencia": "Conceptual",
-      "descripcion": "Me guío por artistas que plantean ideas más allá de la forma.",
-      "artistas_conceptuales": [
-        "Sara Lucas (por su honestidad y crudeza)",
-        "Tracey Emin (por su honestidad y crudeza)",
-        "Olafur Eliasson (por la relación con el espacio y la percepción)",
-        "Leonora Carrington (por la narrativa fantástica y los universos oníricos)",
-        "Remedios Varo (por la narrativa fantástica y los universos oníricos)",
-        "José Clemente Orozco (por su fuerza simbólica y social)",
-        "Guadalupe Posada (por su fuerza simbólica y social)"
+      "tipo": "Conceptual",
+      "referentes": [
+        {
+          "artista": "Sarah Lucas",
+          "razon": "Honestidad sin filtro. La crudeza como método."
+        },
+        {
+          "artista": "Tracey Emin",
+          "razon": "Lo autobiográfico como material legítimo."
+        },
+        {
+          "artista": "Olafur Eliasson",
+          "razon": "La percepción del espacio como tema central."
+        },
+        {
+          "artista": "Leonora Carrington",
+          "razon": "Universos propios con lógica interna consistente."
+        },
+        {
+          "artista": "Remedios Varo",
+          "razon": "Narrativa visual que no necesita explicación exterior."
+        },
+        {
+          "artista": "José Clemente Orozco",
+          "razon": "Fuerza simbólica. El arte con peso social sin perder forma."
+        },
+        {
+          "artista": "Guadalupe Posada",
+          "razon": "Narrativa cultural desde lo popular. Sin nostalgia."
+        }
       ]
     },
     {
-      "tipo_influencia": "Contemporánea",
-      "descripcion": "Actualmente me tienen atrapado artistas contemporáneos que combinan mensaje y experimentación. De cada uno aprendo algo distinto: unos me enseñan técnica, otros concepto, otros cómo hacer que la obra dialogue con el mundo y conmigo mismo. Todo eso influye en cómo planteo cada proyecto.",
-      "artistas_contemporaneos": [
-        "Ai Weiwei",
-        "Zhiyong Jing",
-        "Stefan Zsaitsits"
+      "tipo": "Contemporánea",
+      "referentes": [
+        {
+          "artista": "Ai Weiwei",
+          "razon": "La obra como acto político concreto."
+        },
+        {
+          "artista": "Zhiyong Jing",
+          "razon": "Escala y presencia. Lo monumental como lenguaje."
+        },
+        {
+          "artista": "Stefan Zsaitsits",
+          "razon": "Dibujo con densidad conceptual. La figura humana sin idealización."
+        }
       ]
     }
   ]

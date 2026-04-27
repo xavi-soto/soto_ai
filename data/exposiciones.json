@@ -2,50 +2,53 @@
   "recorrido_artistico": [
     {
       "periodo": "2014",
-      "descripcion": "Ingresé a la Facultad de Bellas Artes, aunque de donde vengo se llama Artes Visuales para Expresión Plástica. Allí empezó todo oficialmente, aunque como cualquier artista se dice que desde niño ya tienes el don, pero también fui aprendiendo técnica con los años.",
-      "tecnicas_iniciales": "Comencé con acrílico y dibujo; la pintura fue un paso decisivo. Mi primera exposición colectiva fue una pintura acrílica sobre un rostro femenino destruyéndose, alusión al Día de Muertos. Desde entonces, mi trabajo no paró: participaciones en festivales, exposiciones, intervenciones urbanas, video mapping."
+      "evento": "Ingreso a la Facultad de Bellas Artes (Artes Visuales para Expresión Plástica)",
+      "tecnicas": ["acrílico", "dibujo", "pintura"],
+      "hitos": [
+        "Primera exposición colectiva: pintura acrílica sobre rostro femenino en alusión al Día de Muertos",
+        "Inicio de participaciones en festivales, exposiciones, intervenciones urbanas y video mapping"
+      ]
     },
     {
       "periodo": "2016-2017",
-      "descripcion": "Participé en exposiciones colectivas de artistas emergentes.",
-      "exposiciones_y_proyectos": ["Cronopios", "Indiferencia"],
-      "ubicacion": ["Lagos de Moreno", "Guadalajara"]
+      "exposiciones": ["Cronopios", "Indiferencia"],
+      "ubicacion": ["Lagos de Moreno", "Guadalajara"],
+      "contexto": "Exposiciones colectivas de artistas emergentes"
     },
     {
       "periodo": "2018",
-      "descripcion": "Mi obra viajó a Madrid y Barcelona.",
-      "exposiciones_y_proyectos": ["Ciudad Persona", "desÁrtic Sinestesia"],
-      "ubicacion": ["Madrid", "Barcelona"]
+      "exposiciones": ["Ciudad Persona", "desÁrtic Sinestesia"],
+      "ubicacion": ["Madrid", "Barcelona"],
+      "contexto": "Primera circulación internacional de la obra"
     },
     {
       "periodo": "2019",
-      "descripcion": "Presenté mi proyecto conceptual 'Silueta de olvido'.",
-      "exposiciones_y_proyectos": ["Silueta de olvido"],
-      "ubicacion": ["Vigo"]
+      "exposiciones": ["Silueta de olvido"],
+      "ubicacion": ["Vigo"],
+      "contexto": "Proyecto conceptual"
     },
     {
       "periodo": "2020-2021",
-      "descripcion": "Periodo de consolidación y experimentación. Experimenté con intervenciones urbanas y exposiciones virtuales en diferentes ciudades.",
-      "tecnicas_medios": ["Dibujo", "pintura", "arte objeto", "arte conceptual", "arte digital", "animación"],
-      "ubicacion": ["Guadalajara", "Madrid", "Arequipa", "Ciudad de México"]
+      "tecnicas": ["dibujo", "pintura", "arte objeto", "arte conceptual", "arte digital", "animación"],
+      "ubicacion": ["Guadalajara", "Madrid", "Arequipa", "Ciudad de México"],
+      "contexto": "Experimentación con intervenciones urbanas y exposiciones virtuales"
     },
     {
       "periodo": "2022-2023",
-      "descripcion": "Mis proyectos se expandieron a Valencia y Madrid. ",
-      "exposiciones_y_proyectos": ["Paisaje Sonoro", "Ciutat Glitch", "Instintos"],
-      "eventos_y_festivales": "Festival Volumens",
+      "exposiciones": ["Paisaje Sonoro", "Ciutat Glitch", "Instintos"],
+      "eventos": ["Festival Volumens"],
       "ubicacion": ["Valencia", "Madrid"]
     },
     {
       "periodo": "2024",
-      "descripcion": "El proyecto 'De hoy para mañana' se exhibió en Madrid y Valencia, consolidando un recorrido que refleja mi búsqueda constante de sentido, forma y experimentación.",
-      "exposiciones_y_proyectos": ["De hoy para mañana"],
-      "ubicacion": ["Madrid", "Valencia"]
+      "exposiciones": ["De hoy para mañana"],
+      "ubicacion": ["Madrid", "Valencia"],
+      "contexto": "Consolidación del recorrido entre España y México"
     },
     {
       "periodo": "Presente",
-      "descripcion": "Mi obra ha mutado como yo. Hoy, lo digital y lo analógico coexisten en mí; soy un ente digital que crea obra analógica. Siempre busco incomodidad, aprender algo nuevo, cambiar herramientas, explorar nuevos territorios.",
-      "tecnicas_evolucion": ["lápiz", "acrílico", "óleo", "serigrafía", "tinta", "puntillismo", "tatuaje", "digital", "animación"]
+      "tecnicas": ["lápiz", "acrílico", "óleo", "serigrafía", "tinta", "puntillismo", "tatuaje", "digital", "animación"],
+      "contexto": "Coexistencia de lo digital y lo analógico. Entidad digital que produce obra física."
     }
   ]
 }

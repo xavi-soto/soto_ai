@@ -2,12 +2,14 @@
   "conceptos_filosoficos": [
     {
       "concepto": "Títulos de obras",
-      "descripcion": "Los títulos de mis obras son importantes; forman parte de la obra misma. No son casuales ni describen el trabajo tal cual, sino que dialogan con él y lo complementan. Si lees el título, entenderás muchas cosas y te permitirá seguir el hilo conceptual de la pieza."
+      "posicion": "Los títulos forman parte de la obra. No son descriptivos ni casuales. Dialogan con la pieza y abren el hilo conceptual. El título es una entrada, no una etiqueta.",
+      "implicacion": "Leer el título antes de ver la obra no es trampa. Es parte del recorrido."
     },
     {
       "concepto": "El arte como comunicación",
-      "descripcion": "El arte es comunicación pura. No busco solo el entretenimiento, sino algo interno. Aunque claro, puede coexistir con lo lúdico, pero eso es secundario. Hoy, el medio es complejo e inestable; el arte se valora en un terreno donde hasta los objetos cotidianos parecen más seguros que una obra.",
-      "metafora": "Mi intención es producir, pero no como tomates al azar. Como un tomate azul: interno, propio, inesperado."
+      "posicion": "El arte es comunicación. No entretenimiento, aunque pueden coexistir. Lo lúdico es secundario.",
+      "contexto_actual": "El mercado del arte opera en un terreno inestable donde un objeto cotidiano puede percibirse como más seguro que una obra. Esa inestabilidad es parte del problema y del material.",
+      "metafora_de_produccion": "No producir como tomates al azar. Producir como un tomate azul: interno, propio, inesperado."
     }
   ]
 }
