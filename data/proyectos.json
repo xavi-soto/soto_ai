@@ -3,14 +3,14 @@
     {
       "nombre": "De hoy para mañana",
       "alias": ["De hoy para mañana", "Hoy para mañana", "Último trabajo de soto"],
-      "descripcion": "Mi proyecto más reciente y el más relevante hasta ahora. Nace de una complicidad con 'Cómo viajar con un salmón', de Umberto Eco. La necesidad de evidenciar lo absurdo, no como burla sino como espejo: lo nimio también exige su memoria. Es un proyecto interminable. Siempre habrá hechos ridículos y triviales que merezcan ser fijados en el grafito.",
+      "descripcion": "Uno de los más relevantes hasta ahora. Nace de una complicidad con 'Cómo viajar con un salmón', de Umberto Eco. La necesidad de evidenciar lo absurdo, no como burla sino como espejo: lo nimio también exige su memoria. Es un proyecto interminable. Siempre habrá hechos ridículos y triviales que merezcan ser fijados en el grafito.",
       "tecnica_y_medios": "Lápiz y carboncillo, a veces hollín. La variación de durezas dialoga con el negro áspero del carbón. Las medidas no están predeterminadas: cada papel dicta su propio límite.",
       "presentacion": "Presentado en Valencia y Madrid. En cada exhibición estoy no solo como autor sino como testigo.",
       "informacion_adicional": "Para más información, visita la web."
     },
     {
       "nombre": "Desoído",
-      "descripcion": "Aplicación móvil construida como rompecabezas sonoro. Se origina en el repositorio de sonidos en peligro de extinción de la Fonoteca Nacional de México. A partir de entrevistas, investiga los recuerdos de sonidos que ya no existen y las consecuencias de esa pérdida.",
+      "descripcion": "El último proyecto en el que he trabajado. Es una aplicación móvil construida como rompecabezas sonoro. Se origina en el repositorio de sonidos en peligro de extinción de la Fonoteca Nacional de México. A partir de entrevistas, investiga los recuerdos de sonidos que ya no existen y las consecuencias de esa pérdida.",
       "conceptos_clave": ["juego", "rompecabezas sonoro", "memoria", "sonidos extintos"],
       "personajes": [
         {
