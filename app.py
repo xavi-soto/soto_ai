@@ -20,7 +20,10 @@ from fastapi import Query
 if not os.getenv("OPENAI_API_KEY"):
     raise ValueError("La clave de API de OpenAI no está configurada como variable de entorno.")
 
+from llama_index.embeddings.huggingface import HuggingFaceEmbedding
+
 Settings.llm = OpenAI(model="gpt-3.5-turbo")
+Settings.embed_model = HuggingFaceEmbedding(model_name="BAAI/bge-small-en-v1.5")
 Settings.chunk_size = 512
 
 # --- Carga del índice ---
